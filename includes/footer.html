@@ -1,0 +1,170 @@
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="text-white mb-4">Policy Servs</h4>
+                    <p class="text-white-50">Your trusted partner for all insurance needs. We provide comprehensive insurance solutions tailored to your requirements.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html#home" class="text-white-50 text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="index.html#about" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="index.html#services" class="text-white-50 text-decoration-none">Services</a></li>
+                        <li class="mb-2"><a href="index.html#testimonials" class="text-white-50 text-decoration-none">Testimonials</a></li>
+                        <li><a href="contact.html" class="text-white-50 text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Our Services</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Life Insurance</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Health Insurance</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Motor Insurance</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Home Insurance</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Contact Info</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i> 123 Insurance Street, New Delhi, 110001
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-phone-alt me-2"></i> +91 12345 67890
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope me-2"></i> info@policyservs.com
+                        </li>
+                        <li>
+                            <i class="far fa-clock me-2"></i> Mon - Fri: 9:00 - 18:00
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-secondary">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; <span id="current-year"></span> PolicyServs. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 text-white-50">
+                        <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
+                        <a href="#" class="text-white-50 text-decoration-none">Terms & Conditions</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Common JavaScript -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Preloader - Enhanced with fallback
+        function hidePreloader() {
+            const preloader = document.querySelector('.preloader');
+            if (preloader) {
+                // Force reflow to ensure the transition works
+                void preloader.offsetWidth;
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        }
+
+        // Try to hide preloader when page is fully loaded
+        if (document.readyState === 'complete') {
+            hidePreloader();
+        } else {
+            window.addEventListener('load', hidePreloader);
+            // Fallback in case load event doesn't fire
+            setTimeout(hidePreloader, 3000);
+        }
+        
+        // Initialize AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+        }
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved user preference, if any, on load
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            html.setAttribute('data-bs-theme', 'dark');
+            if (themeToggle) themeToggle.checked = true;
+        }
+        
+        // Toggle theme when user clicks the toggle
+        if (themeToggle) {
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    html.setAttribute('data-bs-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    html.setAttribute('data-bs-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
